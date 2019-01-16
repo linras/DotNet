@@ -1,0 +1,21 @@
+﻿@model Dogs.Models.Event
+<tr>
+    <td>
+        <p asp-hidden-email="@Model.User.UserName"></p>
+    </td>
+    <td>
+        <p asp-display-for="@Model.Description"></p>
+    </td>
+    <td>
+        <p asp-display-for="@Model.Doge.Name"></p>
+    </td>
+    <td>
+        <p asp-display-for="@Model.When"></p>
+    </td>
+    <td>
+        <p asp-display-for="@Model.Description"></p>
+    </td>
+    <td>
+        <a asp-action="Details" asp-route-id="@Model.EventId" class="btn btn-info btn-sm">Details</a>
+    </td>
+</tr>

@@ -1,0 +1,12 @@
+@using Dogs.Helpers
+
+@inject SignInManager<ApplicationUser> SignInManager
+@if (SignInManager.IsSignedIn(User) && User.IsInRole(RoleHelper.Administrator))
+{
+<ul class="nav navbar-nav">
+    @*<li><a asp-area="" asp-controller="Role" asp-action="Index">User roles</a></li>*@
+    <li><a asp-area="" asp-controller="DogRaces" asp-action="Index">Dog races</a></li>
+    <li><a asp-area="" asp-controller="Dogs" asp-action="Index">Dogs</a></li>
+    <li><a asp-area="" asp-controller="Events" asp-action="Soon">Events</a></li>
+</ul>
+}

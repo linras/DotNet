@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Dogs.Models.Event>
+
+@{
+    ViewData["Title"] = "Upcoming events";
+}
+
+<h2>Upcoming events</h2>
+@inject SignInManager<ApplicationUser> SignInManager
+@if (SignInManager.IsSignedIn(User))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.When)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                Dog
+                @*@Html.DisplayNameFor(model => model.Doge)*@
+            </th>
+            <th>@*Created by*@</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.When)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Doge.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.UserName)
+                </td>
+                <td>
+                    @inject SignInManager<ApplicationUser> SignInManager
+                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+                    {
+                        <div>
+                            <a asp-action="Edit" asp-route-id="@item.EventId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.EventId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.EventId">Delete</a>
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

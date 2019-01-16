@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    <style>
+        body {
+            background-color: antiquewhite;
+        }
+        div {
+            margin: 70px;
+        }
+        h2  {
+            color:chocolate;
+        }
+        b   {
+            color:darkred;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+
+
+
+        <ul class="nav navbar-nav">
+            <li><a asp-area="" asp-controller="Events" asp-action="Soon">Home</a></li>
+            <li><a asp-area="" asp-controller="Events" asp-action="Soon">Upcoming events</a></li>
+        </ul>
+        @inject SignInManager<ApplicationUser> SignInManager
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole(RoleHelper.Administrator))
+        {
+            <ul class="nav navbar-nav">
+                @*<li><a asp-area="" asp-controller="Role" asp-action="Index">User roles</a></li>*@
+                <li><a asp-area="" asp-controller="DogRaces" asp-action="Index">Dog races</a></li>
+                <li><a asp-area="" asp-controller="Dogs" asp-action="Index">Dogs</a></li>
+                <li><a asp-area="" asp-controller="Events" asp-action="Soon">Events</a></li>
+            </ul>
+        }
+        @await Html.PartialAsync("_LoginPartial")
+
+
+    </nav>
+</body>
+</html>
